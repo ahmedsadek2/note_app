@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'screens/home_screen.dart';
+import 'package:notes/views/home_view.dart';
 
 void main() {
-  runApp( const MaterialApp(
-    home: HomePage(),
+  runApp(MaterialApp(
+    theme: ThemeData(brightness: Brightness.dark),
+    home: const HomeView(),
   ));
 }
-
