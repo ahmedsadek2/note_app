@@ -9,7 +9,7 @@ class NoteItem extends StatelessWidget {
       padding: EdgeInsets.only(top: 24,bottom: 24,left: 16),
       decoration: BoxDecoration(
           color: Colors.orangeAccent.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(14)
+          borderRadius: BorderRadius.circular(20)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -46,3 +46,4 @@ class NoteItem extends StatelessWidget {
     );
   }
 }
+
