@@ -7,16 +7,17 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.onChanged,
     this.padding,
+    this.maxLines =1
   });
   final String name;
 
   final Function(String) onChanged;
   final bool isObscure;
- final EdgeInsetsGeometry? padding;
-
+  final EdgeInsetsGeometry? padding;
+  final int maxLines;
   @override
   Widget build(BuildContext context) {
-     TextEditingController controller=TextEditingController();
+    TextEditingController controller = TextEditingController();
     return TextFormField(
       onChanged: onChanged,
       validator: (data) {
@@ -26,24 +27,30 @@ class CustomTextField extends StatelessWidget {
         return null;
       },
       obscureText: isObscure,
+      maxLines:maxLines ,
       controller: controller,
       style: const TextStyle(color: Colors.white),
-      cursorColor: Colors.white,
+      cursorColor: const Color(0xff60f0dd),
       decoration: InputDecoration(
-
         contentPadding: padding,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
-          errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.red)),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.white)),
-          hintText: name,
-          hintStyle: const TextStyle(color: Color(0xff60f0dd))),
+
+        enabledBorder: buildBorder(),
+        errorBorder: buildBorder(Colors.red),
+        focusedBorder: buildBorder(
+          const Color(0xff60f0dd),
+        ),
+        hintText: name,
+        hintStyle: const TextStyle(
+          color: Color(0xff60f0dd),
+        ),
+      ),
+    );
+  }
+
+  OutlineInputBorder buildBorder([color]) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(color: color ?? Colors.white),
     );
   }
 }
