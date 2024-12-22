@@ -15,7 +15,7 @@ class EditNoteVIewBody extends StatelessWidget {
       child: Column(
           children: [
             SizedBox(height: MediaQuery.of(context).size.height*0.08,),
-            const CustomAppBar(title: 'Edit Note', icon: Icon(Icons.check,size: 24,),),
+            const CustomAppBar(title: 'Edit Note', icon: Icons.check,),
             SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
             CustomTextField(name: 'Title',onChanged: (data){},),
             SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
