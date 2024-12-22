@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
-
+class CustomIconButton extends StatelessWidget {
+  const CustomIconButton({super.key, required this.icon});
+  final Icon icon;
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           color: Colors.white.withOpacity(0.06),
         ),
-        child: const Icon(Icons.search,size: 28,),
+        child:  icon,
       ),
     );
   }
