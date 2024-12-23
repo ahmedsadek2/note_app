@@ -12,7 +12,7 @@ class CustomIconButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width*0.11,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          color: Colors.white.withOpacity(0.06),
+          color: Colors.white54,
         ),
         child:  Icon(icon,size: 24,),
       ),
