@@ -8,6 +8,8 @@ import 'models/note_model.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(NoteModelAdapter());
+  // Open Box for Post model
   await Hive.openBox<NoteModelAdapter>("notes_box");
   runApp(
       MaterialApp(
