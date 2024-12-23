@@ -15,7 +15,7 @@ class AddNoteCubit extends Cubit<AddNoteState> {
        await notesBox.add(note);
        emit(AddNoteSuccess());
    } on Exception catch (e) {
-    AddNoteFailure("there is an error try again, ${e.toString()}");
+    emit(AddNoteFailure("there is an error try again, ${e.toString()}"));
    }
   }
 
