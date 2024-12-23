@@ -17,11 +17,11 @@ class EditNoteVIewBody extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height*0.08,),
             const CustomAppBar(title: 'Edit Note', icon: Icons.check,),
             SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
-            CustomTextField(name: 'Title',onChanged: (data){},),
+            CustomTextField(name: 'Title',onSaved: (data){},),
             SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
             CustomTextField(
               name: 'Content',
-              onChanged: (data){},
+              onSaved: (data){},
               maxLines: 5,
             ),
           ]

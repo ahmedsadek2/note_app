@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
+    required this.onTap
   });
-
+ final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: (){},
+    return ElevatedButton(
+      onPressed: onTap,
       style:ButtonStyle(
           backgroundColor: const WidgetStatePropertyAll(Color(0xff60f0dd)),
           fixedSize: WidgetStatePropertyAll(
