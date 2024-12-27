@@ -7,11 +7,13 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.onSaved,
     this.padding,
-    this.maxLines =1
+    this.maxLines =1,
+    this.onChange
   });
   final String name;
 
   final Function(String?)? onSaved;
+  final Function(String?)? onChange;
   final bool isObscure;
   final EdgeInsetsGeometry? padding;
   final int maxLines;
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     TextEditingController controller = TextEditingController();
     return TextFormField(
       onSaved: onSaved,
+        onChanged:onChange,
       validator: (data) {
         if (data?.isEmpty ?? true) {
           return "this field cant be empty";
@@ -27,6 +30,7 @@ class CustomTextField extends StatelessWidget {
         return null;
       },
       obscureText: isObscure,
+
       maxLines:maxLines ,
       controller: controller,
       style: const TextStyle(color: Colors.white),

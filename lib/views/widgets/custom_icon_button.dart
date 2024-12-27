@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
-  const CustomIconButton({super.key, required this.icon});
+  const CustomIconButton({super.key, required this.icon, this.onTap});
   final IconData icon;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
         height: MediaQuery.of(context).size.height*0.045,
         width: MediaQuery.of(context).size.width*0.11,
