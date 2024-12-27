@@ -1,35 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/cubit/add_note_cubit/add_note_cubit.dart';
+import 'package:notes/models/note_model.dart';
 
-class ColorItem extends StatelessWidget {
-  const ColorItem({super.key, required this.isActive, required this.color});
-  final bool isActive;
-  final Color color;
-  @override
-  Widget build(BuildContext context) {
-    return isActive? CircleAvatar(
-      radius: MediaQuery.of(context).size.height*0.03,
-      backgroundColor: Colors.white,
-      child: CircleAvatar(
-        backgroundColor: color,
-        radius: MediaQuery.of(context).size.height*0.0275,
-      ),
-    ): CircleAvatar(
-      backgroundColor:color,
-      radius: MediaQuery.of(context).size.height*0.03,
-    );
-  }
-}
-class ColorListView extends StatefulWidget {
-  const ColorListView({super.key});
+import 'color_list_view.dart';
 
+class EditNoteColors extends StatefulWidget {
+  const EditNoteColors({super.key, required this.note});
+  final NoteModel note;
   @override
-  State<ColorListView> createState() => _ColorListViewState();
+  State<EditNoteColors> createState() => _EditNoteColorsState();
 }
 
-class _ColorListViewState extends State<ColorListView> {
-  int currentIndex =0;
+class _EditNoteColorsState extends State<EditNoteColors> {
+ late int currentIndex;
   final List<Color> colorsList = const[
 
     Color(0xFF005F73), // #005F73
@@ -46,10 +28,14 @@ class _ColorListViewState extends State<ColorListView> {
     Color(0xFF81B29A),
     Color(0xFF5F6366),
   ];
-
+  @override
+  void initState() {
+    currentIndex = colorsList.indexOf(Color(widget.note.color));
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-
     return  SizedBox(
       height: MediaQuery.of(context).size.height*0.1,
       child: ListView.builder(
@@ -62,8 +48,10 @@ class _ColorListViewState extends State<ColorListView> {
             child: GestureDetector(
                 onTap: (){
                   currentIndex =index;
-                  BlocProvider.of<AddNoteCubit>(context).color = colorsList[index];
-                  setState(() {});
+                  widget.note.color =colorsList[index].value;
+                  setState(() {
+                    
+                  });
                 },
                 child: ColorItem(color: colorsList[index],
                   isActive: currentIndex==index,)

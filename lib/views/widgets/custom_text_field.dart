@@ -8,10 +8,11 @@ class CustomTextField extends StatelessWidget {
     this.onSaved,
     this.padding,
     this.maxLines =1,
-    this.onChange
+    this.onChange,
+    this.validator
   });
   final String name;
-
+  final String? Function(String?)? validator;
   final Function(String?)? onSaved;
   final Function(String?)? onChange;
   final bool isObscure;
@@ -23,12 +24,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       onSaved: onSaved,
         onChanged:onChange,
-      validator: (data) {
-        if (data?.isEmpty ?? true) {
-          return "this field cant be empty";
-        }
-        return null;
-      },
+      validator: validator,
       obscureText: isObscure,
 
       maxLines:maxLines ,

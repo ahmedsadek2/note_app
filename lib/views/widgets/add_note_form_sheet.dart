@@ -20,35 +20,54 @@ class AddNoteForm extends StatefulWidget {
 class _AddNoteFormState extends State<AddNoteForm> {
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
-  String? title,subTitle;
+  String? title, subTitle;
   @override
   Widget build(BuildContext context) {
-
     return Form(
       key: formKey,
-      autovalidateMode: autoValidateMode,
       child: Column(
-        mainAxisAlignment:MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CustomTextField(name: 'Title',onSaved: (data){
-            title =data;
-          },),
-          SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
           CustomTextField(
+            validator: (data) {
+              if (data == null || data.isEmpty) {
+                return "This field can't be empty";
+              }
+              return null;
+            },
+            name: 'Title',
+            onSaved: (data) {
+              title = data;
+            },
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.03,
+          ),
+          CustomTextField(
+            validator: (data) {
+              if (data == null || data.isEmpty) {
+                return "This field can't be empty";
+              }
+              return null;
+            },
             name: 'Content',
-            onSaved: (data){
+            onSaved: (data) {
               subTitle = data;
             },
             maxLines: 5,
           ),
-           ColorListView(),
-          SizedBox(height:MediaQuery.of(context).size.height*0.06 ,),
+          ColorListView(),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.06,
+          ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return buildCustomButton(state, context);
-  },
-),
-          SizedBox(height:MediaQuery.of(context).size.height*0.07 ,)
+            },
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.07,
+          )
         ],
       ),
     );
@@ -56,26 +75,24 @@ class _AddNoteFormState extends State<AddNoteForm> {
 
   CustomButton buildCustomButton(AddNoteState state, BuildContext context) {
     return CustomButton(
-          isLoading:state is AddNoteLoading ? true :false,
-          onTap: (){
-          if(formKey.currentState!.validate()){
-            formKey.currentState!.save();
-             var currentDate = DateTime.now();
-             var formattedCurrentDate = DateFormat.yMd().format(currentDate);
-            var note = NoteModel(
-                title: title!,
-                subTitle: subTitle!,
-                date: formattedCurrentDate,
-                color: Colors.cyan.value
-            );
+      isLoading: state is AddNoteLoading ? true : false,
+      onTap: () {
+        if (formKey.currentState!.validate()) {
+          formKey.currentState!.save();
+          var currentDate = DateTime.now();
+          var formattedCurrentDate = DateFormat.yMd().format(currentDate);
+          var note = NoteModel(
+              title: title!,
+              subTitle: subTitle!,
+              date: formattedCurrentDate,
+              color: Colors.cyan.value);
 
-            BlocProvider.of<AddNoteCubit>(context).addNote(note);
-          }else{
-            autoValidateMode = AutovalidateMode.always;
-            setState(() {
-            });
-          }
-        },);
+          BlocProvider.of<AddNoteCubit>(context).addNote(note);
+        } else {
+          autoValidateMode = AutovalidateMode.always;
+          setState(() {});
+        }
+      },
+    );
   }
 }
-

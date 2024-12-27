@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/cubit/notes_cubit/notes_cubit.dart';
 import 'package:notes/models/note_model.dart';
-
 import 'custom_app_bar.dart';
 import 'custom_text_field.dart';
+import 'edit-note_colors.dart';
 
 class EditNoteVIewBody extends StatefulWidget {
   const EditNoteVIewBody({
@@ -37,18 +37,20 @@ class _EditNoteVIewBodyState extends State<EditNoteVIewBody> {
                },
              ),
             SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
-            CustomTextField(name: 'Title',
+            CustomTextField(name: widget.note.title,
               onChange: (data){
-              title = data ;
+              title = data ??  widget.note.title;
             },),
             SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
             CustomTextField(
-              name: 'Content',
+              name: widget.note.subTitle,
               onChange: (data){
-              subTitle = data ;
+              subTitle = data ??  widget.note.subTitle;
               },
               maxLines: 5,
             ),
+            SizedBox(height:MediaQuery.of(context).size.height*0.03 ,),
+            EditNoteColors(note: widget.note,)
           ]
       ),
     );
