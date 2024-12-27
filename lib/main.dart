@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:notes/cubit/notes_cubit/notes_cubit.dart';
 import 'package:notes/simple_bloc_observer.dart';
 import 'package:notes/views/home_view.dart';
 
@@ -14,7 +15,7 @@ void main() async {
   await Hive.openBox<NoteModel>("notes_box");
 
   runApp(
-    const NotesApp()
+      const NotesApp()
   );
 }
 
@@ -25,11 +26,14 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark, fontFamily: "Poppins"),
-        home:HomeView(),
-      )
+    return BlocProvider(
+      create: (context) => NotesCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(brightness: Brightness.dark, fontFamily: "Poppins"),
+        home: HomeView(),
+      ),
+    )
     ;
   }
 }
